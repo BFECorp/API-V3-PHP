@@ -72,3 +72,15 @@ function get_pricing_params_string($params, $name)
     //echo "<br>pricing params string is $result <br>";
     return $result;
 }
+
+function get_label_params_string($params, $name)
+{
+    $result = '';
+    foreach($params as $item)
+    {
+        $result .= "&" . $name . "=";
+        $result .= urlencode($item);
+    }
+    echo "<br>label params string is $result <br>";
+    return $result;
+}
