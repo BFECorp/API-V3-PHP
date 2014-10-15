@@ -1,6 +1,6 @@
 <?php
 
-function rest_helper($url, $params = null, $verb = 'GET', $format = 'json')
+function rest_helper($url, $params = null, $verb = 'GET', $format = 'json', $bulid_query = true)
 {
   $cparams = array(
     'http' => array(
@@ -9,7 +9,9 @@ function rest_helper($url, $params = null, $verb = 'GET', $format = 'json')
     )
   );
   if ($params !== null) {
-    $params = http_build_query($params);
+	if($bulid_query){
+		$params = http_build_query($params);
+	}
     if ($verb == 'POST') {
       $cparams['http']['header'] = "Content-type: application/x-www-form-urlencoded\r\n"
                 . "Content-Length: " . strlen($params) . "\r\n";
@@ -19,7 +21,7 @@ function rest_helper($url, $params = null, $verb = 'GET', $format = 'json')
         //echo "</pre>";
     } else {
       $url .= '?' . $params;
-      echo "<br>Request GET URL: $url!<br>";
+      //echo "<br>Request GET URL: $url!<br>";
     }
   }
 
@@ -81,6 +83,18 @@ function get_label_params_string($params, $name)
         $result .= "&" . $name . "=";
         $result .= urlencode($item);
     }
-    echo "<br>label params string is $result <br>";
+    //echo "<br>label params string is $result <br>";
+    return $result;
+}
+
+function get_repeat_string_params_string($params, $name)
+{
+    $result = '';
+    foreach($params as $item)
+    {
+        $result .= "&" . $name . "=";
+        $result .= urlencode($item);
+    }
+    //echo "<br>label params string is $result <br>";
     return $result;
 }
