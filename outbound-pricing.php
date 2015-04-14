@@ -29,3 +29,5 @@ $response = rest_helper($api_address, $request_data, 'GET');
 echo "<pre>";
 print_r($response);
 echo "</pre>";
+
+?>
